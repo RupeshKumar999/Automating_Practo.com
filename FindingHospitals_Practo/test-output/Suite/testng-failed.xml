@@ -5,9 +5,8 @@
     <classes>
       <class name="Testclass.Testing">
         <methods>
-          <include name="ValidateLogin"/>
+          <include name="closeBrowser"/>
           <include name="startReport"/>
-          <include name="validateName"/>
           <include name="endReport"/>
           <include name="validatingPhoneNumber"/>
           <include name="validatingWrongEmail"/>

@@ -7,10 +7,9 @@
         <methods>
           <include name="closeBrowser"/>
           <include name="startReport"/>
-          <include name="validateName"/>
           <include name="endReport"/>
-          <include name="openingCorporatePage"/>
           <include name="validatingPhoneNumber"/>
+          <include name="getExcelData"/>
           <include name="validatingWrongEmail"/>
           <include name="getResult"/>
         </methods>

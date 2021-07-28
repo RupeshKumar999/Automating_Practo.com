@@ -16,7 +16,6 @@ import org.testng.ITestResult;
 import org.testng.TestNG;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -55,41 +54,36 @@ public class Testing  extends BaseUI{
 	 
 	 }
 	  
-	 
-/*
+
 	   //Function to read from Excel File
-	   @BeforeSuite
+	   @BeforeTest
 	   public String[] getExcelData () throws IOException { //Reads data from the excel file
-			
-			//  Retrieve Excel data from ReadExcelFile class by passing the arguments i,e
-			 //   the size of data array as integer type, name of excel file and name of excel sheet as String
-			
-		   
+		
 		   data  = ReadExcelData.ReadExcelFile.getData(7, "ReadExcelData", "ReadData");
 			return data;
 		}  
-  
-	*/ 
+ 
 	 
 	 @AfterMethod
 	 public void getResult(ITestResult result){
 	 if(result.getStatus() == ITestResult.FAILURE){
-	 //logger.log(Status.FAIL, "Test Case Failed is "+result.getName());
+	 logger.log(Status.FAIL, "Test Case Failed is "+result.getName());
 	 //MarkupHelper is used to display the output in different colors
 	 logger.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " - Test Case Failed", ExtentColor.RED));
 	 logger.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
 	 }else if(result.getStatus() == ITestResult.SKIP){
-	 //logger.log(Status.SKIP, "Test Case Skipped is "+result.getName());
+	 logger.log(Status.SKIP, "Test Case Skipped is "+result.getName());
 	 logger.log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " - Test Case Skipped", ExtentColor.ORANGE)); 
-	 }
-	 }
 	
+	 }
+	 }
 	
 	 
 	@Test(priority=0,groups="smoke")
 	public void validateURL() throws IOException {
 		
 		logger = extent.createTest("Login To Practo Site"); 
+		
 		invokeBrowser("chrome");
 		getUrl("websiteURL");
 		logger.log(Status.INFO, "Comparing Actual Vs Expected Url");	
@@ -108,6 +102,7 @@ public class Testing  extends BaseUI{
 	public void EnterLocationInSearchBox() throws InterruptedException, IOException {
 		
 		logger = extent.createTest("Seaching the Desired Location");
+		
 		logger.log(Status.INFO, "Locating Location Field");
 		locateCitySearchBox();
 		logger.log(Status.INFO, "Clearing the present text");
@@ -124,13 +119,12 @@ public class Testing  extends BaseUI{
 		
 	}
 	
-	
-	
 
 	@Test(priority=2,groups="smoke")
 	public void EnterHospital() throws InterruptedException, IOException {
 		
 		logger = extent.createTest("Seaching For Hospital");
+		
 		logger.log(Status.INFO, "Locating Hospital Search Box");
 		locateHospitalField();
 		logger.log(Status.INFO, "Entering Hospital in the SearchBox");
@@ -145,19 +139,18 @@ public class Testing  extends BaseUI{
 		
 	}
 	 
+	
 	@Test(priority=3,groups="smoke")
 	public void Validating24X7CheckBox() throws InterruptedException, IOException {
 
 		logger = extent.createTest("Clicking on 24X7 Checkbox");
+		
 		logger.log(Status.INFO, "Locating 24X7 CheckBox");
 		selectCheckBoxfor24X7();
 	    Thread.sleep(2000);
 	    logger.log(Status.INFO, "Verifying Checkbox is selected");
-	    
-	 //  WebElement checkbox = driver.findElement(By.xpath(prop.getProperty("Checkbox_24x7")));
-	 //   Assert.assertTrue(checkbox.isSelected());
-		
-
+	    //WebElement checkbox = driver.findElement(By.xpath(prop.getProperty("Checkbox_24x7")));
+	    //Assert.assertTrue(checkbox.isSelected());
 	    screenshot("Filter_24X7");
 		logger.addScreenCaptureFromPath(System.getProperty("user.dir") + "\\Screenshots\\Filter_24X7.png");	
 		logger.log(Status.PASS, "Test Case Passed");
@@ -170,6 +163,7 @@ public class Testing  extends BaseUI{
 	public void ValidateParkingFilter() throws InterruptedException, IOException {
 		
 		logger = extent.createTest("Clicking on Parking Filter");
+		
 		logger.log(Status.INFO, "Clicking on Apply Filter");
 		Thread.sleep(1000);
 	    driver.findElement(By.xpath(prop.getProperty("applyFilter"))).click();
@@ -177,11 +171,9 @@ public class Testing  extends BaseUI{
 		logger.log(Status.INFO, "Applying Parking Filter");
 		applyParkingFilter();
 		Thread.sleep(1000);
-		
 	    logger.log(Status.INFO, "Verifying Parking Filter is selected");	
 	    //WebElement element = driver.findElement(By.xpath("//*[@data-qa-id='Open_24X7_checkbox']"));
-	    //Assert.assertTrue(element.isSelected());
-		 
+	    //Assert.assertTrue(element.isSelected()); 
 	    screenshot("Filter_Parking"); 
 		logger.addScreenCaptureFromPath(System.getProperty("user.dir") + "\\Screenshots\\Filter_Parking.png");	
 		logger.log(Status.PASS, "Test Case Passed");
@@ -193,6 +185,7 @@ public class Testing  extends BaseUI{
 	public void ValidateStoreDesiredHospitals() throws InterruptedException, IOException {
 		
         logger = extent.createTest("Storing the List of Desired Hospitals");
+        
 		logger.log(Status.INFO, "Locating all the Hospitals with more then 3.5 Rating");
 		logger.log(Status.INFO, "Printing the Hospitals Name on Console and Excel Sheet");
 		storeDesiredHospitals();
@@ -249,10 +242,12 @@ public class Testing  extends BaseUI{
 		
 	}
 	
+	
 	@Test(priority=8,groups="smoke")
 	public void storingTopCities() throws IOException {
 		
 	    logger = extent.createTest("Storing Top Cities Names");
+	    
 	    logger.log(Status.INFO, "Locating Names of Top Cities");
 		logger.log(Status.INFO, "Storing on the Excel File And Display of the Console");
 		storeAndDisplayTopCitiesName();		
@@ -261,16 +256,12 @@ public class Testing  extends BaseUI{
 	}	
 	 
 	
-	
 	@Test(priority=9,groups="smoke")
 	public void openingCorporatePage() throws InterruptedException, IOException {
 		
-		
-		 logger = extent.createTest(" Data Providers Link");
-		 invokeBrowser("chrome");
-			getUrl("websiteURL");
-			
-		// driver.navigate().refresh();
+		 logger = extent.createTest(" Data Providers Link");	
+		 
+		 getUrl("websiteURL");
 	     logger.log(Status.INFO, "Clicking on Data Providers");
 		 clickOnProviders();
 		 logger.log(Status.INFO, "Clicking on Wellness Link");
@@ -283,7 +274,6 @@ public class Testing  extends BaseUI{
 		 logger.log(Status.PASS, "Test Case Passed");	
 			 
 	}
-	
 	
 	
      @Test(priority=10,groups="smoke")
@@ -299,7 +289,6 @@ public class Testing  extends BaseUI{
 
      }
 	
-    
      
 	@Test(priority=11,groups="smoke")
 	public void validatingWrongEmail() throws InterruptedException, IOException, HeadlessException, AWTException {
@@ -307,15 +296,15 @@ public class Testing  extends BaseUI{
 		logger = extent.createTest("Register with Wrong Email");
 		
 		 logger.log(Status.INFO, "Enter the Name");
-		 enterName("Rupesh");
+		 enterName(data[0]);
 		 logger.log(Status.INFO, "Enter the Organization Name");
-		 enterOrganizationName("prosthatic ltd");
+		 enterOrganizationName(data[1]);
 		 logger.log(Status.INFO, "Enter the Email");
-		 EnterEmail("kumar366@g");
+		 EnterEmail(data[2]);
 		 logger.log(Status.INFO, "Enter the Contact Number");
-		 EnterContactNumber("9087654321");
+		 EnterContactNumber(data[3].replace("\"", ""));
 		 logger.log(Status.INFO, "Choose the Size");
-		 EnterSize("501-1000");
+		 EnterSize(data[4]);
 		 submitForm("Invalid_Email");     
 		 logger.addScreenCaptureFromPath(System.getProperty("user.dir") + "\\Screenshots\\Invalid_Email.png");
 		 logger.log(Status.PASS, "Test Case Failed");
@@ -323,7 +312,6 @@ public class Testing  extends BaseUI{
 	}
 	
 	
-
 	@Test(priority=12,groups="smoke")
 	public void validatingPhoneNumber() throws InterruptedException, IOException, HeadlessException, AWTException {
 		
@@ -332,15 +320,15 @@ public class Testing  extends BaseUI{
 		
 		 logger.log(Status.INFO, "Enter the Name");
 		 driver.navigate().refresh();
-		 enterName("Rupesh");
+		 enterName(data[1]);
 		 logger.log(Status.INFO, "Enter the Organization Name");
-		 enterOrganizationName("Prosthatics Ltd.");
+		 enterOrganizationName(data[2]);
 		 logger.log(Status.INFO, "Enter the Email");
-		 EnterEmail("kumar.rex999@gmail.com");
+		 EnterEmail(data[5]);
 		 logger.log(Status.INFO, "Enter the Contact Number");
-		 EnterContactNumber("908765");
+		 EnterContactNumber(data[6]);
 		 logger.log(Status.INFO, "Choose the Size");
-		 EnterSize("501-1000");
+		 EnterSize(data[4]);
 		 submitForm("Invalid_Phone_Number");
         // screenshot("Invalid_Phone_Number"); 
 		 logger.addScreenCaptureFromPath(System.getProperty("user.dir") + "\\Screenshots\\Invalid_Phone_Number.png");
@@ -383,6 +371,4 @@ public class Testing  extends BaseUI{
 		 extent.flush();
 		    }
 		
-	
-	
 }

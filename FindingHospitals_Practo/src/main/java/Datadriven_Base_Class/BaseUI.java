@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -27,11 +28,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,6 +46,7 @@ import org.testng.Assert;
 
 public class BaseUI {
 
+	// public RemoteWebDriver driver;
 	public WebDriver driver;
 	static public Properties prop;
 	// public RemoteWebDriver driver;
@@ -47,27 +55,23 @@ public class BaseUI {
 
 		if (browserNameKey.equalsIgnoreCase("chrome")) {
 
-			System.setProperty("webdriver.chrome.driver",
+			
+			
+			
+		//	ChromeOptions cap = new ChromeOptions();
+	    //	cap.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+	    // 	  driver = new RemoteWebDriver(new URL("http://192:168.28.150:15344"),cap);	
+				System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "//Driver//chromedriver.exe");
 			driver = new ChromeDriver();
-
-			// cap=DesiredCapabilities.chrome();
-			// ChromeOptions cap = new ChromeOptions();
-			// cap.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
-			// UnexpectedAlertBehaviour.IGNORE);
-			// driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),cap);
-
-		} else if (browserNameKey.equalsIgnoreCase("firefox")) {
+			
+    	} else if (browserNameKey.equalsIgnoreCase("firefox")) {
 
 			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "//Driver//geckodriver.exe");
 			driver = new FirefoxDriver();
 
-			// cap=DesiredCapabilities.firefox();
-			// DesiredCapabilities cap = DesiredCapabilities.firefox();
-			// driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),cap);
-
 		} else if (browserNameKey.equalsIgnoreCase("edge")) {
-			// cap=DesiredCapabilities.edge();
+			
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "//Drivers//chromedriver.exe");
 			driver = new ChromeDriver();
@@ -335,8 +339,8 @@ public class BaseUI {
 	
 	public void clickOnProviders() throws InterruptedException {
 		// xPath for the providers text
-		driver.findElement(By.xpath(prop.getProperty("Data_Providers")))
-				.click();
+		//driver.findElement(By.xpath(prop.getProperty("Data_Providers")))
+		//		.click();
 		driver.findElement(By.xpath(prop.getProperty("Data_Providers")))
 		.click();
 

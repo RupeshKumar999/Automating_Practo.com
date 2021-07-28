@@ -15,10 +15,10 @@ public class ReadExcelFile {
 			data=new String[dataSize];
 		
 			//getting absolute path of excel file
-			String Name=new File(fileName).getAbsolutePath();
+		//	String Name=new File(fileName).getAbsolutePath();
 			
 			//Locate excel file
-			FileInputStream file=new FileInputStream(fileName); 
+			FileInputStream file=new FileInputStream(System.getProperty("user.dir")+"\\ReadExcelData.xlsx"); 
 			XSSFWorkbook workbook=new XSSFWorkbook(file);
 			
 			//Select excel sheet
